@@ -1,4 +1,4 @@
-# Cipher Desk — Web-Based Text Encryption Tool
+# Cipher Desk Web-Based Text Encryption Tool
 
 A single-page web app for encrypting and decrypting text with a choice of
 five algorithms, built with a Python (Flask) backend and a vanilla
