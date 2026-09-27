@@ -67,38 +67,6 @@ one asymmetric cipher — plus a one-way hash as a bonus feature.
 | **RSA (bonus)** | Asymmetric cipher | Generates a fresh 2048-bit key pair per message (no key management UI, so nothing is persisted server-side) and encrypts with **OAEP** padding via the public key. Because RSA can only encrypt data smaller than the key size, message length is capped — in practice RSA is normally used to encrypt a symmetric key rather than a whole message, which is noted in the UI. |
 | **SHA-256 (bonus)** | Cryptographic hash | One-way — there is no "decrypt" for a hash. Used here to demonstrate the difference between *encryption* (reversible, needs a key) and *hashing* (irreversible, used for integrity checks and password storage). |
 
-### Design decisions worth noting in a demo/report
 
-- **Where keys are derived, not typed directly (AES/DES):** using PBKDF2
-  with a per-message random salt means the same passphrase produces a
-  different derived key (and different ciphertext) every time, which
-  defeats rainbow-table attacks.
-- **CBC mode + random IV:** without a random IV, encrypting the same
-  plaintext twice with the same key would produce identical ciphertext,
-  leaking a pattern to an observer.
-- **RSA's private key is only ever shown once, client-side:** the backend
-  never stores it, matching the "no auth/no persistence" scope of the
-  base project.
-- **Server-side validation mirrors the frontend:** even though the UI
-  disables empty submissions, `app.py` re-validates independently, since
-  the API could be called directly.
 
-## What's implemented vs. optional (bonus) features
 
-- ✅ Encrypt **and** decrypt (not just encrypt) for all ten algorithms
-  (SHA-256 is intentionally hash-only).
-- ✅ Hashing option (SHA-256).
-- ✅ One-click **Copy** for the result.
-- ⬜ User authentication / saved message history — out of scope for this
-  build (no database wired up); the architecture (a JSON API) would
-  support adding it behind a login route without changing the crypto
-  logic.
-
-## Demo video / GitHub
-
-This README doubles as the short report requested in the submission
-requirements. For the demo video, a natural walkthrough is: encrypt a
-message with AES → show the ciphertext → decrypt it back → try Caesar
-and Base64 for comparison → generate an RSA pair and decrypt with the
-private key → hash a message with SHA-256 and note that there's no
-decrypt button for it.
