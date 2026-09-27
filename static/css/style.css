@@ -1,0 +1,220 @@
+:root {
+  --ink: #1C2333;
+  --ink-soft: #2A3348;
+  --bg: #FAF8F3;
+  --panel: #FFFFFF;
+  --panel-border: #E4DFD2;
+  --output-bg: #F1EEE4;
+  --output-field: #FFFFFF;
+  --paper-text: #23283A;
+  --muted: #6B7280;
+  --brass: #A66F22;
+  --brass-dim: #8C5C1B;
+  --rust: #B9563F;
+  --radius: 3px;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--paper-text);
+  font-family: "Inter", system-ui, sans-serif;
+  line-height: 1.5;
+}
+
+.wrap {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 56px 24px 40px;
+}
+
+/* ---------- Masthead ---------- */
+.masthead {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  margin-bottom: 44px;
+}
+
+.wheel {
+  width: 76px;
+  height: 76px;
+  flex-shrink: 0;
+  color: var(--brass);
+}
+.wheel-ticks line { stroke: var(--brass); stroke-width: 1.2; }
+
+.kicker {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 12.5px;
+  letter-spacing: 0.02em;
+  color: var(--brass);
+  margin: 0 0 6px;
+}
+
+.masthead h1 {
+  font-family: "Fraunces", serif;
+  font-weight: 600;
+  font-size: 42px;
+  margin: 0 0 8px;
+  color: var(--ink);
+}
+
+.lede {
+  margin: 0;
+  color: var(--muted);
+  font-size: 15px;
+  max-width: 46ch;
+}
+
+/* ---------- Panels ---------- */
+.desk {
+  display: grid;
+  gap: 20px;
+}
+
+.panel {
+  background: var(--panel);
+  color: var(--paper-text);
+  border: 1px solid var(--panel-border);
+  border-radius: var(--radius);
+  padding: 28px;
+}
+
+.field { display: flex; flex-direction: column; gap: 8px; margin-bottom: 18px; }
+.field:last-child { margin-bottom: 0; }
+
+label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--paper-text);
+}
+
+textarea, input[type="text"], select {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 14px;
+  background: #FBFAF6;
+  border: 1px solid #D6D0BF;
+  border-radius: var(--radius);
+  padding: 10px 12px;
+  color: var(--paper-text);
+  resize: vertical;
+}
+
+textarea:focus, input:focus, select:focus {
+  outline: 2px solid var(--brass);
+  outline-offset: 1px;
+}
+
+select {
+  font-family: "Inter", sans-serif;
+  appearance: none;
+  background-image: linear-gradient(45deg, transparent 50%, var(--paper-text) 50%),
+                     linear-gradient(135deg, var(--paper-text) 50%, transparent 50%);
+  background-position: calc(100% - 18px) center, calc(100% - 13px) center;
+  background-size: 5px 5px, 5px 5px;
+  background-repeat: no-repeat;
+  padding-right: 34px;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+
+@media (max-width: 560px) {
+  .row { grid-template-columns: 1fr; }
+  .masthead { flex-direction: column; align-items: flex-start; gap: 14px; }
+}
+
+.hint {
+  font-size: 13px;
+  color: var(--muted);
+  margin: -6px 0 18px;
+}
+
+/* ---------- Buttons ---------- */
+.actions { display: flex; gap: 10px; flex-wrap: wrap; }
+
+.btn {
+  font-family: "Inter", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 10px 18px;
+  border-radius: var(--radius);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: transform 0.08s ease, background 0.15s ease;
+}
+.btn:active { transform: translateY(1px); }
+
+.btn-primary {
+  background: var(--ink);
+  color: #FFFFFF;
+}
+.btn-primary:hover { background: var(--ink-soft); }
+
+.btn-ghost {
+  background: transparent;
+  border-color: #C9C2AC;
+  color: var(--paper-text);
+}
+.btn-ghost:hover { background: #F1ECDD; }
+
+.btn-copy {
+  background: transparent;
+  border: 1px solid #C9C2AC;
+  color: var(--paper-text);
+  padding: 5px 12px;
+  font-size: 12.5px;
+}
+.btn-copy:hover { background: #E9E3D2; }
+
+/* ---------- Output ---------- */
+.panel-output {
+  background: var(--output-bg);
+  border-color: var(--panel-border);
+}
+.panel-output label { color: var(--paper-text); }
+.panel-output textarea {
+  background: var(--output-field);
+  color: var(--brass-dim);
+  border: 1px solid #D6D0BF;
+  font-weight: 500;
+}
+
+.output-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.rsa-keys {
+  margin-top: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.rsa-keys textarea { font-size: 11.5px; color: var(--muted); }
+
+/* ---------- Error ---------- */
+.error {
+  color: var(--rust);
+  background: #FBEAE4;
+  border: 1px solid #E3B7A8;
+  border-radius: var(--radius);
+  padding: 10px 12px;
+  font-size: 13.5px;
+  margin: 16px 0 0;
+}
+
+/* ---------- Footer ---------- */
+.foot {
+  margin-top: 32px;
+  color: var(--muted);
+  font-size: 12.5px;
+}

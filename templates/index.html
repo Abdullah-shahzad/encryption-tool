@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cipher Desk &mdash; Text Encryption Tool</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+  <div class="wrap">
+
+    <header class="masthead">
+      <svg class="wheel" viewBox="0 0 120 120" aria-hidden="true">
+        <circle cx="60" cy="60" r="52" fill="none" stroke="currentColor" stroke-width="1.2" />
+        <circle cx="60" cy="60" r="38" fill="none" stroke="currentColor" stroke-width="1.2" />
+        <g class="wheel-ticks">
+          <line x1="60" y1="8" x2="60" y2="18" />
+          <line x1="60" y1="102" x2="60" y2="112" />
+          <line x1="8" y1="60" x2="18" y2="60" />
+          <line x1="102" y1="60" x2="112" y2="60" />
+        </g>
+      </svg>
+      <div class="masthead-text">
+        <p class="kicker">plaintext in, ciphertext out</p>
+        <h1>Cipher Desk</h1>
+        <p class="lede">Encrypt or decrypt a message with a method of your choosing, right in the browser.</p>
+      </div>
+    </header>
+
+    <main class="desk">
+
+      <section class="panel">
+
+        <div class="field">
+          <label for="plaintext">Your text</label>
+          <textarea id="plaintext" rows="5"
+            placeholder="Type or paste the message you want to protect&hellip;"></textarea>
+        </div>
+
+        <div class="row">
+          <div class="field">
+            <label for="algorithm">Method</label>
+            <select id="algorithm">
+              <option value="" disabled selected>Choose a cipher&hellip;</option>
+              <option value="caesar">Caesar Cipher</option>
+              <option value="vigenere">Vigenère Cipher</option>
+              <option value="atbash">Atbash Cipher</option>
+              <option value="railfence">Rail Fence Cipher</option>
+              <option value="xor">XOR Cipher</option>
+              <option value="base64">Base64</option>
+              <option value="aes">AES-256</option>
+              <option value="des">Triple DES (3DES)</option>
+              <option value="chacha20">ChaCha20</option>
+            </select>
+          </div>
+
+          <div class="field key-field" id="keyField" hidden>
+            <label for="secretKey" id="keyLabel">Key</label>
+            <textarea id="secretKey" rows="2" placeholder="e.g. 3, or a passphrase"></textarea>
+          </div>
+        </div>
+
+        <p class="hint" id="algoHint"></p>
+
+        <div class="actions">
+          <button type="button" class="btn btn-primary" id="encryptBtn">Encrypt</button>
+          <button type="button" class="btn btn-ghost" id="decryptBtn">Decrypt</button>
+          <button type="button" class="btn btn-ghost" id="hashBtn">Hash (SHA-256)</button>
+        </div>
+
+        <p class="error" id="errorMsg" role="alert" hidden></p>
+
+      </section>
+
+      <section class="panel panel-output">
+        <div class="output-head">
+          <label for="output">Result</label>
+          <button type="button" class="btn btn-copy" id="copyBtn" hidden>Copy</button>
+        </div>
+        <textarea id="output" rows="5" readonly placeholder="Your result will appear here."></textarea>
+
+      </section>
+
+    </main>
+
+
+
+  </div>
+
+  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+
+</html>
